@@ -78,6 +78,7 @@
     <Compile Include="Modules\ModuleTests.cs" />
     <Compile Include="Modules\MultiplyTests.cs" />
     <Compile Include="Modules\ScalePointTests.cs" />
+    <Compile Include="Modules\SimplexTests.cs" />
     <Compile Include="NoiseGeneratorTests.cs" />
     <Compile Include="NoiseMathTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

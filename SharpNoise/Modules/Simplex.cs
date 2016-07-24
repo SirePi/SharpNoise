@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace SharpNoise.Modules
 {
@@ -30,7 +31,14 @@ namespace SharpNoise.Modules
             new Grad(0,1,1), new Grad(0,-1,1), new Grad(0,1,-1), new Grad(0,-1,-1),
         };
 
-        private static readonly short[] P = 
+        private static readonly short[] PTable = new short[256];
+        private static readonly short[] PermTable = new short[512];
+        private static readonly short[] PermMod12Table = new short[512];
+
+        /// <summary>
+        /// The default P-table for the simplex noise generator
+        /// </summary>
+        public static readonly short[] DefaultPTable =
         {
             151,160,137,91,90,15,
             131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
@@ -47,21 +55,62 @@ namespace SharpNoise.Modules
             138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180
         };
 
-        private static short[] Perm = new short[512];
-        private static short[] PermMod12 = new short[512];
-
         static Simplex()
         {
+            InitializePermTables(DefaultPTable);
+        }
+
+        private static void InitializePermTables(short[] p)
+        {
+            Debug.Assert(p != null);
+            Debug.Assert(p.Length == DefaultPTable.Length);
+
+            Array.Copy(p, PTable, PTable.Length);
+
             for (int i = 0; i < 512; i++)
             {
-                Perm[i] = P[i & 255];
-                PermMod12[i] = (short)(Perm[i] % 12);
+                PermTable[i] = PTable[i & 255];
+                PermMod12Table[i] = (short)(PermTable[i] % 12);
             }
         }
 
-        private static double Dot(ref Grad g, double x, double y, double z)
+        private static double Dot(Grad g, double x, double y, double z)
         {
             return g.X * x + g.Y * y + g.Z * z;
+        }
+
+        /// <summary>
+        /// Initialize the P-table of the simplex noise generator
+        /// </summary>
+        /// <param name="pTable">An array of 256 shorts</param>
+        public static void ReseedGenerator(short[] pTable)
+        {
+            if (pTable == null)
+                throw new ArgumentNullException(nameof(pTable));
+            if (pTable.Length != DefaultPTable.Length)
+                throw new ArgumentException($"P-Table must have length of {DefaultPTable.Length}. Given: {pTable.Length}.", nameof(pTable));
+            InitializePermTables(pTable);
+        }
+
+        /// <summary>
+        /// Initialize the P-table of the simplex generator by shuffling the default table with a given seed
+        /// </summary>
+        /// <param name="seed">The seed to use fpr shuffling</param>
+        public static void ReseedGenerator(int seed)
+        {
+            var pTable = new short[DefaultPTable.Length];
+            Array.Copy(DefaultPTable, pTable, pTable.Length);
+
+            var seedBytes = BitConverter.GetBytes(seed);
+            for (int i = 0; i < pTable.Length; i++)
+            {
+                pTable[i] ^= seedBytes[0];
+                pTable[i] ^= seedBytes[1];
+                pTable[i] ^= seedBytes[2];
+                pTable[i] ^= seedBytes[3];
+            }
+
+            InitializePermTables(pTable);
         }
 
         // 3D simplex noise
@@ -173,10 +222,10 @@ namespace SharpNoise.Modules
             int ii = i & 255;
             int jj = j & 255;
             int kk = k & 255;
-            int gi0 = PermMod12[ii + Perm[jj + Perm[kk]]];
-            int gi1 = PermMod12[ii + i1 + Perm[jj + j1 + Perm[kk + k1]]];
-            int gi2 = PermMod12[ii + i2 + Perm[jj + j2 + Perm[kk + k2]]];
-            int gi3 = PermMod12[ii + 1 + Perm[jj + 1 + Perm[kk + 1]]];
+            int gi0 = PermMod12Table[ii + PermTable[jj + PermTable[kk]]];
+            int gi1 = PermMod12Table[ii + i1 + PermTable[jj + j1 + PermTable[kk + k1]]];
+            int gi2 = PermMod12Table[ii + i2 + PermTable[jj + j2 + PermTable[kk + k2]]];
+            int gi3 = PermMod12Table[ii + 1 + PermTable[jj + 1 + PermTable[kk + 1]]];
 
             // Noise contributions from the four corners
             double n0 = 0.0, n1 = 0.0, n2 = 0.0, n3 = 0.0;
@@ -186,28 +235,28 @@ namespace SharpNoise.Modules
             if (t0 >= 0)
             {
                 t0 *= t0;
-                n0 = t0 * t0 * Dot(ref Grad3[gi0], x0, y0, z0);
+                n0 = t0 * t0 * Dot(Grad3[gi0], x0, y0, z0);
             }
 
             double t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1;
             if (t1 >= 0)
             {
                 t1 *= t1;
-                n1 = t1 * t1 * Dot(ref Grad3[gi1], x1, y1, z1);
+                n1 = t1 * t1 * Dot(Grad3[gi1], x1, y1, z1);
             }
 
             double t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2;
             if (t2 >= 0)
             {
                 t2 *= t2;
-                n2 = t2 * t2 * Dot(ref Grad3[gi2], x2, y2, z2);
+                n2 = t2 * t2 * Dot(Grad3[gi2], x2, y2, z2);
             }
 
             double t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3;
             if (t3 >= 0)
             {
                 t3 *= t3;
-                n3 = t3 * t3 * Dot(ref Grad3[gi3], x3, y3, z3);
+                n3 = t3 * t3 * Dot(Grad3[gi3], x3, y3, z3);
             }
 
             // Add contributions from each corner to get the final noise value.
