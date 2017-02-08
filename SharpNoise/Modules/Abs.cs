@@ -9,7 +9,7 @@ namespace SharpNoise.Modules
     /// <remarks>
     /// This noise module requires one source module.
     /// </remarks>
-    [Serializable]
+    
     public class Abs : Module
     {
         /// <summary>

@@ -27,7 +27,7 @@ namespace SharpNoise.Modules
     ///
     /// This noise module does not require any source modules. 
     /// </remarks>
-    [Serializable]
+
     public class Spheres : Module
     {
         /// <summary>
@@ -42,7 +42,7 @@ namespace SharpNoise.Modules
         /// Increasing the frequency increases the density of the concentric
         /// spheres, reducing the distances between them.
         /// </remarks>
-        public double Frequency { get; set; } = DefaultFrequency;
+        public double Frequency { get; set; }
 
         /// <summary>
         /// Constructor.
@@ -50,6 +50,7 @@ namespace SharpNoise.Modules
         public Spheres()
             : base(0)
         {
+            Frequency = DefaultFrequency;
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace SharpNoise.Modules
     ///
     /// This noise module requires two source modules.
     /// </remarks>
-    [Serializable]
+    
     public class Power : Module
     {
         /// <summary>

@@ -16,7 +16,6 @@ namespace SharpNoise.Modules
     ///
     /// This noise module requires one source module.
     /// </remarks>
-    [Serializable]
     public class ScalePoint : Module
     {
         /// <summary>
@@ -37,19 +36,19 @@ namespace SharpNoise.Modules
         /// Gets or sets the scaling factor applied to the x coordinate of the
         /// input value.
         /// </summary>
-        public double XScale { get; set; } = DefaultScale;
+        public double XScale { get; set; }
 
         /// <summary>
         /// Gets or sets the scaling factor applied to the y coordinate of the
         /// input value.
         /// </summary>
-        public double YScale { get; set; } = DefaultScale;
+        public double YScale { get; set; }
 
         /// <summary>
         /// Gets or sets the scaling factor applied to the z coordinate of the
         /// input value.
         /// </summary>
-        public double ZScale { get; set; } = DefaultScale;
+        public double ZScale { get; set; }
 
         /// <summary>
         /// Sets the scaling factor to apply to the input value.
@@ -81,6 +80,9 @@ namespace SharpNoise.Modules
         public ScalePoint()
             : base(1)
         {
+            XScale = DefaultScale;
+            YScale = DefaultScale;
+            ZScale = DefaultScale;
         }
 
         /// <summary>
@@ -94,7 +96,7 @@ namespace SharpNoise.Modules
         public override double GetValue(double x, double y, double z)
         {
             return SourceModules[0].GetValue(
-                x * XScale, 
+                x * XScale,
                 y * YScale,
                 z * ZScale);
         }

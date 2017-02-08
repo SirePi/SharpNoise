@@ -15,7 +15,7 @@ namespace SharpNoise.Modules
     /// information.
     /// <seealso cref="Perlin"/>
     /// </remarks>
-    [Serializable]
+
     public class Billow : Module
     {
         #region Defaults
@@ -55,7 +55,7 @@ namespace SharpNoise.Modules
         /// <summary>
         /// Gets or sets the frequency of the first octave.
         /// </summary>
-        public double Frequency { get; set; } = DefaultFrequency;
+        public double Frequency { get; set; }
 
         /// <summary>
         /// Gets or sets the lacunarity of the billowy noise.
@@ -64,7 +64,7 @@ namespace SharpNoise.Modules
         /// The lacunarity is the frequency multiplier between successive
         /// octaves.
         /// </remarks>
-        public double Lacunarity { get; set; } = DefaultLacunarity;
+        public double Lacunarity { get; set; }
 
         /// <summary>
         /// Gets or sets the quality of the billowy noise.
@@ -73,7 +73,7 @@ namespace SharpNoise.Modules
         /// See <see cref="NoiseQuality"/> for definitions of the various
         /// coherent-noise qualities.
         /// </remarks>
-        public NoiseQuality Quality { get; set; } = DefaultQuality;
+        public NoiseQuality Quality { get; set; }
 
         /// <summary>
         /// Gets or sets the number of octaves that generate the billowy noise.
@@ -82,7 +82,7 @@ namespace SharpNoise.Modules
         /// The number of octaves controls the amount of detail in the billowy
         /// noise.
         /// </remarks>
-        public int OctaveCount { get; set; } = DefaultOctaveCount;
+        public int OctaveCount { get; set; }
 
         /// <summary>
         /// Gets or sets the persistence value of the billowy noise.
@@ -90,12 +90,12 @@ namespace SharpNoise.Modules
         /// <remarks>
         /// The persistence value controls the roughness of the billowy noise.
         /// </remarks>
-        public double Persistence { get; set; } = DefaultPersistence;
+        public double Persistence { get; set; }
 
         /// <summary>
         /// Gets or sets the seed value used by the billowy-noise function.
         /// </summary>
-        public int Seed { get; set; } = DefaultSeed;
+        public int Seed { get; set; }
 
         /// <summary>
         /// Constructor.
@@ -103,6 +103,12 @@ namespace SharpNoise.Modules
         public Billow()
             : base(0)
         {
+            Frequency = DefaultFrequency;
+            Lacunarity = DefaultLacunarity;
+            Quality = DefaultQuality;
+            OctaveCount = DefaultOctaveCount;
+            Persistence = DefaultPersistence;
+            Seed = DefaultSeed;
         }
 
         /// <summary>

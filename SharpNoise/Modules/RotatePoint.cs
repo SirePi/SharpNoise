@@ -20,7 +20,7 @@ namespace SharpNoise.Modules
     ///
     /// This noise module requires one source module.
     /// </remarks>
-    [Serializable]
+    
     public class RotatePoint : Module
     {
         /// <summary>

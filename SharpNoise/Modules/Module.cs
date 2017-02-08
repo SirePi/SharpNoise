@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SharpNoise.Modules
 {
@@ -264,7 +262,7 @@ namespace SharpNoise.Modules
     /// <see cref="Add" />, which is a very simple noise module.
     /// </para>
     /// </remarks>
-    [Serializable]
+    
     public abstract class Module
     {
         private readonly Module[] sourceModules;
@@ -292,64 +290,6 @@ namespace SharpNoise.Modules
                 sourceModules = new Module[sourceModuleCount];
             else
                 sourceModules = emptyModulesArray;
-        }
-
-        /// <summary>
-        /// Serializes the entire module graph to a stream.
-        /// </summary>
-        /// <param name="target">The stream that the serialized data will be written to.</param>
-        /// <remarks>
-        /// This method uses the BinaryFormatter as a default.
-        /// </remarks>
-        public void Serialize(Stream target)
-        {
-            Serialize(target, new BinaryFormatter());
-        }
-
-        /// <summary>
-        /// Serializes the entire module graph to a stream.
-        /// </summary>
-        /// <param name="target">The stream that the serialized data will be written to.</param>
-        /// <param name="formatter">The formatter to use for serialization</param>
-        public void Serialize(Stream target, IFormatter formatter)
-        {
-            if (target == null || formatter == null)
-                throw new ArgumentNullException("None of the arguments can be null.");
-
-            try
-            {
-                formatter.Serialize(target, this);
-            }
-            catch (SerializationException ex)
-            {
-                throw new ModuleSerializationException("Module graph could not be serialized.", ex);
-            }
-
-        }
-
-        /// <summary>
-        /// Deserializes a module graph from a stream.
-        /// </summary>
-        /// <param name="source">The source stream from which the serialized data will be read</param>
-        /// <param name="formatter">The formatter to be used for deserialization</param>
-        /// <returns>Returns the deserialized object</returns>
-        public static T Deserialize<T>(Stream source, IFormatter formatter) where T : Module
-        {
-            if (source == null || formatter == null)
-                throw new ArgumentNullException("None of the arguments can be null.");
-
-            try
-            {
-                return (T)formatter.Deserialize(source);
-            }
-            catch (SerializationException ex)
-            {
-                throw new ModuleSerializationException("An error occurred during deserialization.", ex);
-            }
-            catch (InvalidCastException ex)
-            {
-                throw new ModuleSerializationException("The deserialized object was not a module.", ex);
-            }
         }
 
         /// <summary>

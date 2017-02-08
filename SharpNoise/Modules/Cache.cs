@@ -30,8 +30,8 @@ namespace SharpNoise.Modules
     ///
     /// This noise module requires one source module.
     /// </remarks>
-    [Serializable]
-    public class Cache : Module, IDeserializationCallback, IDisposable
+
+    public class Cache : Module, IDisposable
     {
         class CacheEntry
         {
@@ -43,7 +43,6 @@ namespace SharpNoise.Modules
 
         private bool disposedValue = false;
 
-        [NonSerialized]
         ThreadLocal<CacheEntry> localCacheEntry = new ThreadLocal<CacheEntry>();
 
         /// <summary>
@@ -73,7 +72,9 @@ namespace SharpNoise.Modules
         {
             var oldCacheEntry = localCacheEntry;
             localCacheEntry = new ThreadLocal<CacheEntry>();
-            oldCacheEntry?.Dispose();
+
+            if (oldCacheEntry != null)
+                oldCacheEntry.Dispose();
         }
 
         /// <summary>
@@ -127,7 +128,8 @@ namespace SharpNoise.Modules
                     // TODO: dispose managed state (managed objects).
                 }
 
-                localCacheEntry?.Dispose();
+                if (localCacheEntry != null)
+                    localCacheEntry.Dispose();
 
                 disposedValue = true;
             }

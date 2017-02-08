@@ -13,7 +13,7 @@ namespace SharpNoise.Modules
     ///
     /// This noise module requires one source module.
     /// </remarks>
-    [Serializable]
+
     public class ScaleBias : Module
     {
         /// <summary>
@@ -44,7 +44,7 @@ namespace SharpNoise.Modules
         /// module, multiplies it with the scaling factor, adds the bias to
         /// it, then outputs the value.
         /// </remarks>
-        public double Bias { get; set; } = DefaultBias;
+        public double Bias { get; set; }
 
         /// <summary>
         /// Gets or sets the scaling factor to apply to the output value from the
@@ -55,7 +55,7 @@ namespace SharpNoise.Modules
         /// module, multiplies it with the scaling factor, adds the bias to
         /// it, then outputs the value.
         /// </remarks>
-        public double Scale { get; set; } = DefaultScale;
+        public double Scale { get; set; }
 
         /// <summary>
         /// Constructor.
@@ -63,6 +63,8 @@ namespace SharpNoise.Modules
         public ScaleBias()
             : base(1)
         {
+            Bias = DefaultBias;
+            Scale = DefaultScale;
         }
 
         /// <summary>

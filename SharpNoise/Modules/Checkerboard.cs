@@ -14,7 +14,7 @@ namespace SharpNoise.Modules
     ///
     /// This noise module does not require any source modules.
     /// </remarks>
-    [Serializable]
+    
     public class Checkerboard : Module
     {
         /// <summary>

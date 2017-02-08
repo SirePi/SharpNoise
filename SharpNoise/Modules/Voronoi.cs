@@ -48,7 +48,7 @@ namespace SharpNoise.Modules
     /// 
     /// This noise module requires no source modules.
     /// </remarks>
-    [Serializable]
+
     public class Voronoi : Module
     {
         /// <summary>
@@ -83,7 +83,7 @@ namespace SharpNoise.Modules
         /// near-zero value) causes this noise module to generate cracked mud
         /// formations.
         /// </remarks>
-        public bool EnableDistance { get; set; } = DefaultEnableDistance;
+        public bool EnableDistance { get; set; }
 
         /// <summary>
         /// Gets or sets the displacement value of the Voronoi cells.
@@ -94,7 +94,7 @@ namespace SharpNoise.Modules
         /// value controls the range of random values to assign to each
         /// cell.  The range of random values is +/- the displacement value.
         /// </remarks>
-        public double Displacement { get; set; } = DefaultDisplacement;
+        public double Displacement { get; set; }
 
         /// <summary>
         /// Gets or sets the frequency of the seed points.
@@ -103,7 +103,7 @@ namespace SharpNoise.Modules
         /// The frequency determines the size of the Voronoi cells and the
         /// distance between these cells.
         /// </remarks>
-        public double Frequency { get; set; } = DefaultFrequency;
+        public double Frequency { get; set; }
 
         /// <summary>
         /// Gets or sets the seed value used by the Voronoi cells
@@ -113,7 +113,7 @@ namespace SharpNoise.Modules
         /// coherent-noise function.  By modifying the seed value, the output
         /// of that function changes.
         /// </remarks>
-        public int Seed { get; set; } = DefaultSeed;
+        public int Seed { get; set; }
 
         /// <summary>
         /// See the documentation on the base class.
@@ -180,8 +180,8 @@ namespace SharpNoise.Modules
 
             // Return the calculated distance with the displacement value applied.
             return value + (Displacement * NoiseGenerator.ValueNoise3D(
-                (int)Math.Floor(xCandidate), 
-                (int)Math.Floor(yCandidate), 
+                (int)Math.Floor(xCandidate),
+                (int)Math.Floor(yCandidate),
                 (int)Math.Floor(zCandidate)));
         }
 
@@ -191,6 +191,10 @@ namespace SharpNoise.Modules
         public Voronoi()
             : base(0)
         {
+            EnableDistance = DefaultEnableDistance;
+            Displacement = DefaultDisplacement;
+            Frequency = DefaultFrequency;
+            Seed = DefaultSeed;
         }
     }
 }

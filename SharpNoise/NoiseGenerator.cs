@@ -287,7 +287,7 @@ namespace SharpNoise
         {
             get
             {
-                return Array.AsReadOnly(DefaultVectors);
+                return new ReadOnlyCollection<double>(DefaultVectors);
             }
         }
 
@@ -298,7 +298,7 @@ namespace SharpNoise
         {
             get
             {
-                return Array.AsReadOnly(vectortable);
+                return new ReadOnlyCollection<double>(vectortable);
             }
         }
 

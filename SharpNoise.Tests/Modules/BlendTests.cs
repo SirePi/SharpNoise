@@ -11,9 +11,9 @@ namespace SharpNoise.Tests.Modules
     /// </summary>
     public class BlendTests
     {
-        public static IEnumerable<object[]> AlphaDataSource => Enumerable.Range(-3, 7).Select(i => i / 10.0).Select(i => new object[] { i });
+        public static IEnumerable<object[]> AlphaDataSource = Enumerable.Range(-3, 7).Select(i => i / 10.0).Select(i => new object[] { i });
 
-        public static IEnumerable<object[]> ScaleDataSource => Enumerable.Range(-2, 5).Select(i => new object[] { (double)i });
+        public static IEnumerable<object[]> ScaleDataSource = Enumerable.Range(-2, 5).Select(i => new object[] { (double)i });
 
         public static IEnumerable<object[]> ScaledAlphas()
         {

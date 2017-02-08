@@ -13,7 +13,6 @@ namespace SharpNoise.Modules
     ///
     /// This noise module does not require any source modules.
     /// </remarks>
-    [Serializable]
     public class Constant : Module
     {
         /// <summary>
@@ -24,7 +23,7 @@ namespace SharpNoise.Modules
         /// <summary>
         /// The value that will be produced by the module
         /// </summary>
-        public double ConstantValue { get; set; } = DefaultConstantValue;
+        public double ConstantValue { get; set; }
 
         /// <summary>
         /// Constructor.
@@ -32,6 +31,7 @@ namespace SharpNoise.Modules
         public Constant()
             : base(0)
         {
+            ConstantValue = DefaultConstantValue;
         }
 
         /// <summary>

@@ -26,14 +26,14 @@ namespace SharpNoise.Modules
     ///
     /// This noise module requires one source module.
     /// </remarks>
-    [Serializable]
+    
     public class Curve : Module
     {
         /// <summary>
         /// This structure defines a control point.
         /// Control points are used for defining splines.
         /// </summary>
-        [Serializable]
+        
         public struct ControlPoint : IEquatable<ControlPoint>, IComparable<ControlPoint>
         {
             public readonly double InputValue;
@@ -159,7 +159,7 @@ namespace SharpNoise.Modules
         {
             get
             {
-                return controlPoints.AsReadOnly();
+                return new ReadOnlyCollection<ControlPoint>(controlPoints);
             }
             set
             {

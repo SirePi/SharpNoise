@@ -45,7 +45,7 @@ namespace SharpNoise.Modules
     ///
     /// This noise module requires three source modules.
     /// </remarks>
-    [Serializable]
+    
     public class Blend : Module
     {
         /// <summary>

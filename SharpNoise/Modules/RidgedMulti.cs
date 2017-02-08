@@ -67,7 +67,7 @@ namespace SharpNoise.Modules
     /// the authors in Texturing and Modeling: A Procedural Approach
     /// (Morgan Kaufmann, 2002. ISBN 1-55860-848-6.)
     /// </remarks>
-    [Serializable]
+
     public class RidgedMulti : Module
     {
         /// <summary>
@@ -103,7 +103,7 @@ namespace SharpNoise.Modules
         /// <summary>
         /// Gets or sets the frequency of the first octave.
         /// </summary>
-        public double Frequency { get; set; } = DefaultFrequency;
+        public double Frequency { get; set; }
 
         /// <summary>
         /// Gets or sets the lacunarity of the ridged-multifractal noise.
@@ -128,7 +128,7 @@ namespace SharpNoise.Modules
         /// <summary>
         /// Gets or sets the quality of the ridged-multifractal noise.
         /// </summary>
-        public NoiseQuality Quality { get; set; } = DefaultQuality;
+        public NoiseQuality Quality { get; set; }
 
         /// <summary>
         /// Gets or sets the number of octaves that generate the
@@ -153,7 +153,7 @@ namespace SharpNoise.Modules
         /// Gets or sets the seed value used by the ridged-multifractal-noise
         /// function.
         /// </summary>
-        public int Seed { get; set; } = DefaultSeed;
+        public int Seed { get; set; }
 
         double[] spectralWeights;
         double lacunarity;
@@ -165,8 +165,11 @@ namespace SharpNoise.Modules
         public RidgedMulti()
             : base(0)
         {
+            Frequency = DefaultFrequency;
             Lacunarity = DefaultLacunarity;
             OctaveCount = DefaultOctaveCount;
+            Quality = DefaultQuality;
+            Seed = DefaultSeed;
         }
 
         /// <summary>

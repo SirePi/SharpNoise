@@ -47,7 +47,7 @@ namespace SharpNoise.Modules
     ///
     /// This noise module requires four source modules.
     /// </remarks>
-    [Serializable]
+    
     public class Displace : Module
     {
         /// <summary>

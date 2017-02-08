@@ -6,7 +6,7 @@ namespace SharpNoise.Modules
     /// <summary>
     /// The exception that indicates that a module is missing
     /// </summary>
-    [Serializable]
+
     public class NoModuleException : Exception
     {
         /// <summary>
@@ -34,15 +34,5 @@ namespace SharpNoise.Modules
             : base(message, inner)
         {
         }
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="info">Serialization info</param>
-        /// <param name="context">Serialization context</param>
-        protected NoModuleException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        } 
     }
 }

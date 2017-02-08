@@ -97,14 +97,14 @@ namespace SharpNoise.Modules
     /// 
     /// This noise module requires one source module.
     /// </remarks>
-    [Serializable]
+
     public class Turbulence : Module
     {
         /// <summary>
         /// Default frequency
         /// </summary>
         public const double DefaultFrequency = Perlin.DefaultFrequency;
-        
+
         /// <summary>
         /// Default power
         /// </summary>
@@ -136,7 +136,7 @@ namespace SharpNoise.Modules
         /// The power of the turbulence determines the scaling factor that is
         /// applied to the displacement amount.
         /// </remarks>
-        public double Power { get; set; } = DefaultPower;
+        public double Power { get; set; }
 
         /// <summary>
         /// Gets or sets the frequency of the turbulence.
@@ -168,10 +168,10 @@ namespace SharpNoise.Modules
         /// the displacement amount.  High values roughly change the
         /// displacement amount, which produces more "kinky" changes.
         /// </remarks>
-        public int Roughness 
+        public int Roughness
         {
-            get 
-            { 
+            get
+            {
                 return xDistort.OctaveCount;
             }
             set
@@ -219,6 +219,7 @@ namespace SharpNoise.Modules
             Seed = DefaultSeed;
             Frequency = DefaultFrequency;
             Roughness = DefaultRoughness;
+            Power = DefaultPower;
         }
 
         /// <summary>

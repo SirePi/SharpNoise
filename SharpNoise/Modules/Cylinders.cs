@@ -32,7 +32,7 @@ namespace SharpNoise.Modules
     ///
     /// This noise module does not require any source modules.
     /// </remarks>
-    [Serializable]
+
     public class Cylinders : Module
     {
         /// <summary>
@@ -47,7 +47,7 @@ namespace SharpNoise.Modules
         /// Increasing the frequency increases the density of the concentric
         /// cylinders, reducing the distances between them.
         /// </remarks>
-        public double Frequency { get; set; } = DefaultFrequency;
+        public double Frequency { get; set; }
 
         /// <summary>
         /// Constructor.
@@ -55,6 +55,7 @@ namespace SharpNoise.Modules
         public Cylinders()
             : base(0)
         {
+            Frequency = DefaultFrequency;
         }
 
         /// <summary>

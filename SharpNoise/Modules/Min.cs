@@ -8,7 +8,7 @@ namespace SharpNoise.Modules
     /// <remarks>
     /// This noise module requires two source modules.
     /// </remarks>
-    [Serializable]
+    
     public class Min : Module
     {
         /// <summary>

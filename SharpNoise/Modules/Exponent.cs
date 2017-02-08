@@ -14,7 +14,6 @@ namespace SharpNoise.Modules
     ///
     /// This noise module requires one source module.
     /// </remarks>
-    [Serializable]
     public class Exponent : Module
     {
         /// <summary>
@@ -41,7 +40,7 @@ namespace SharpNoise.Modules
         /// range becomes 0.0 to 1.0), maps that value onto an exponential
         /// curve, then rescales that value back to the original range.
         /// </remarks>
-        public double Exp { get; set; } = DefaultExponent;
+        public double Exp { get; set; }
 
         /// <summary>
         /// Constructor.
@@ -49,6 +48,7 @@ namespace SharpNoise.Modules
         public Exponent()
             : base(1)
         {
+            Exp = DefaultExponent;
         }
 
         /// <summary>

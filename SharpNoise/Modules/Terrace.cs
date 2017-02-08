@@ -33,7 +33,7 @@ namespace SharpNoise.Modules
     ///
     /// This noise module requires one source module.
     /// </remarks>
-    [Serializable]
+
     public class Terrace : Module
     {
         readonly List<double> controlPoints;
@@ -47,7 +47,7 @@ namespace SharpNoise.Modules
         /// Enables or disables the inversion of the terrace-forming curve
         /// between the control points.
         /// </summary>
-        public bool InvertTerraces { get; set; } = false;
+        public bool InvertTerraces { get; set; }
 
         /// <summary>
         /// Gets or sets all ControlPoints in the Module
@@ -56,7 +56,7 @@ namespace SharpNoise.Modules
         {
             get
             {
-                return controlPoints.AsReadOnly();
+                return new ReadOnlyCollection<double>(controlPoints);
             }
             set
             {
@@ -80,6 +80,7 @@ namespace SharpNoise.Modules
         public Terrace()
             : base(1)
         {
+            InvertTerraces = false;
             controlPoints = new List<double>();
         }
 

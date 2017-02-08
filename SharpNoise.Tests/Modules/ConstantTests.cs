@@ -10,7 +10,7 @@ namespace SharpNoise.Tests.Modules
     /// </summary>
     public class ConstantTests
     {
-        public static IEnumerable<object[]> ConstantDataSource => Enumerable.Range(-5, 11).Select(i => i / 10.0).Select(d => new object[] { d });
+        public static IEnumerable<object[]> ConstantDataSource = Enumerable.Range(-5, 11).Select(i => i / 10.0).Select(d => new object[] { d });
 
         [Theory]
         [MemberData("ConstantDataSource")]
