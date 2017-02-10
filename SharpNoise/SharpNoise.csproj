@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -51,6 +51,7 @@
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Plane.cs" />
     <Compile Include="Models\Sphere.cs" />
+    <Compile Include="Modules\White.cs" />
     <Compile Include="Modules\Abs.cs" />
     <Compile Include="Modules\Add.cs" />
     <Compile Include="Modules\Billow.cs" />
@@ -67,7 +68,6 @@
     <Compile Include="Modules\Invert.cs" />
     <Compile Include="Modules\Max.cs" />
     <Compile Include="Modules\Module.cs" />
-    <Compile Include="Modules\ModuleSerializationException.cs" />
     <Compile Include="Modules\Multiply.cs" />
     <Compile Include="Modules\NoModuleException.cs" />
     <Compile Include="Modules\Perlin.cs" />
@@ -82,7 +82,7 @@
     <Compile Include="Modules\Terrace.cs" />
     <Compile Include="Modules\TranslatePoint.cs" />
     <Compile Include="Modules\Turbulence.cs" />
-    <Compile Include="Modules\Voronoi.cs" />
+    <Compile Include="Modules\Cell.cs" />
     <Compile Include="NoiseCube.cs" />
     <Compile Include="Builders\NoiseCubeBuilder.cs" />
     <Compile Include="NoiseGenerator.cs" />
@@ -93,7 +93,7 @@
     <Compile Include="NoiseMap.cs" />
   </ItemGroup>
   <ItemGroup />
-    <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
